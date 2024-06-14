@@ -162,7 +162,7 @@ export const signIn: RequestHandler = async (
       mobile: user.mobile,
       address: user.address,
     },
-    jwttoken,
+    token: jwttoken,
   });
 };
 export const getUserDetails: RequestHandler = async (

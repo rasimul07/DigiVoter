@@ -75,13 +75,14 @@ export default function CastVote() {
   const [otp, setOtp] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
 
-  console.log(profile);
+  // console.log(profile?.adhar);
   const handleVoteClick = async (candidateId) => {
     setVotedCandidateId(candidateId);
     setTimeout(() => {
       setShowOtpPopup(true);
     }, 1000);
     const token = localStorage.getItem('token')
+    // console.log(token);
     try {
       const response = await client.post(
         "/vote/sendOtpForVote",
@@ -89,13 +90,10 @@ export default function CastVote() {
           adhar: profile?.adhar,
         },
         {
-          params: {
-            useAdhar: "yes",
-            useMobile: "no",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
           },
-          headers:{
-            Authorization:'Bearer '+ token
-          }
         }
       );
       alert(response.data.message);

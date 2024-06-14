@@ -41,9 +41,9 @@ function Login() {
           }
         });
       }
-      localStorage.setItem("token", response.data.jwttoken);
+      localStorage.setItem("token", response.data.token);
       console.log(response.data.jwttoken);
-      dispatch(updateProfile(response.data))
+      dispatch(updateProfile(response.data.profile))
       navigate("/home")
     } catch (error) {
       alert("Invalid credentials. Please try again.");

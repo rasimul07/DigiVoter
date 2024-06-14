@@ -52,16 +52,12 @@ export const sendMailVote: RequestHandler = async (
   req: VerifyWhenGiveVote,
   res: Response
 ) => {
-  // ${baseUrl}?UseAdhar=yes&UseMobile=no
-  const { useAdhar, useMobile } = req.query;
   let user;
+  const { adhar } = req.body;
 
-  //first all we have to check valid user or not
-  if (useAdhar === "yes") {
-    const { adhar } = req.body;
-    console.log(adhar)
-    user = await User.findOne({ adhar });
-  }
+  // console.log(adhar)
+  user = await User.findOne({ adhar });
+  
   if (!user)
     return res
       .status(403)
